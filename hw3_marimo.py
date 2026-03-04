@@ -97,7 +97,7 @@ def _():
 
     As a first exercise, implement a linear layer in PyTorch.  We in fact did this in class, so you can largely use the example there, but it might help to have a review of the important elements here.  Here are the key points about implementing such a linear layer.
     - All PyTorch layers are implemented as a subclasses of the `Module` class.  This class implements a few things: 1) it lets you instatiate layers as class instances, and apply these layers to inputs or intermediate units in the network; 2) it encapsulates the parameters of that layer (e.g., the weights that you will be training), and recursively tracks parameters of any module included in the class.
-    - The `Parameter` class is a simple wrapper you can provide apply to a tensor within that class, such that the layer will track these parameters (in any layer that includes it), and compute gradients of the parameters by default.
+    - The `Parameter` class is a simple wrapper you can apply to a tensor within that class, such that the layer will track these parameters (in any layer that includes it), and compute gradients of the parameters by default.
     - Generally, you need to implement two functions in a module class: the `__init__()` function and the `forward()` function.  The former is called to initialize your layer, set up the parameters, etc, and the latter is called when you apply the layer to some input.
 
 
@@ -291,7 +291,7 @@ def _():
     mo.md(r"""
     ### Question 4 - Data Loader
 
-    Finally, you'll implement what's known as a DataLoader for your problem.  In idiomatic PyTorch, a data loader is a class that you can iterate over to get all the minibatches of a dataset.  You can use one with code that looks something like that following (there's slight differences when it comes to how to initialize the data loader from a dataset, and you'll have to write another once when considering LLMs, but this is the basic approach).
+    Finally, you'll implement what's known as a DataLoader for your problem.  In idiomatic PyTorch, a data loader is a class that you can iterate over to get all the minibatches of a dataset.  You can use one with code that looks something like the following (there's slight differences when it comes to how to initialize the data loader from a dataset, and you'll have to write another once when considering LLMs, but this is the basic approach).
 
     ```python
     ### initialize data loader, where X_full and y_full are complete dataset
@@ -372,10 +372,10 @@ def _():
     mo.md(r"""
     ### Question 5 - Optimization epoch
 
-    Finally, let's implement a routine that actually runs an epoch of optimization on a given dataset.  It's convenient (though we'll change this a bit when we do LLM training, since that it typically run single-epoch) to implement an `epoch()` function that carries out a single pass over the data, because this can be used both perform one epoch of optimization on the training set _and_ to compute test loss/error on a held out test set (making sure we don't actually run the optimization then).
+    Finally, let's implement a routine that actually runs an epoch of optimization on a given dataset.  It's convenient (though we'll change this a bit when we do LLM training, since that is typically run single-epoch) to implement an `epoch()` function that carries out a single pass over the data, because this can be used both perform one epoch of optimization on the training set _and_ to compute test loss/error on a held out test set (making sure we don't actually run the optimization then).
 
     Implement the function below.  This function takes three arguments a model, a loader, a loss, and an (optional) optimizer.  An example usage would be:
-    ```
+    ```python
     model = Linear(n,k)
     loader = DataLoader(X_full,y_full)
     loss = CrossEntropyLoss()
